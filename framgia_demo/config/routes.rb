@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     end
   end
   resources :microposts, only: [:create, :destroy]
+  resources :comments,          only: [:create, :destroy]
   resources :relationships,       only: [:create, :destroy]
 
   # The priority is based upon order of creation: first created -> highest priority.

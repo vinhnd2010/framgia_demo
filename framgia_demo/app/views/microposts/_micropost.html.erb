@@ -8,6 +8,21 @@
     	<%= link_to "delete", micropost, method: :delete,
     									data: {confirm: "You sure?"} %>
   </span>
-  <%= render 'comments/comment_form' %>
+  
+  <%= render micropost.comments %>
+  <% if logged_in? && (current_user.following?(micropost.user)||current_user?(micropost.user))%>
+    <%= form_for(@comment = micropost.comments.build ) do |f| %>
+        <div>
+          <%= hidden_field :comment, :micropost_id %>
+          <%= hidden_field_tag :user_id, current_user.id %>
+        </div>
+        <p>
+          <br />
+          <%= f.text_field :content, placeholder: "Comment ..." %>
+          
+        </p>
+      
+    <% end %>
+  <% end %>  
 
 </li>
