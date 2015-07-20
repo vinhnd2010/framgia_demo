@@ -1,11 +1,14 @@
 <li id="comment-<%= comment.id %>">
-  <%= link_to gravatar_for(comment.micropost.user, size: 50), comment.micropost.user %>
-  <span class="user"><%= link_to comment.micropost.user.name, comment.micropost.user %></span>
-  <span class="content"><%= comment.content %></span>
-  <span class="timestamp">
-    Posted <%= time_ago_in_words(comment.created_at) %> ago.
-    <% if current_user?(comment.user) %>
-     <%= link_to "delete", comment, method: :delete, remote:true %>
-    <% end %>
-  </span>
-+</li>
+<div class = "comment">
+  <%= link_to gravatar_for(comment.user, size: 50), comment.micropost.user %>
+  
+	  <span class="user"><%= link_to comment.user.name, comment.user %></span>
+	  <span class="content"><%= comment.content %></span>
+	  <span class="timestamp">
+	    Commented <%= time_ago_in_words(comment.created_at) %> ago.
+	    <% if current_user?(comment.user) %>
+	     <%= link_to "delete", comment, method: :delete, remote:true %>
+	    <% end %>
+	  </span>
+</div>
+</li>

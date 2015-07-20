@@ -261,6 +261,11 @@ input {
       padding: 5px 0;
     }
   }
+
+  .comment{
+    display: block;
+    margin-left: 60px
+  }
   .timestamp {
     color: $gray-light;
     display: block;

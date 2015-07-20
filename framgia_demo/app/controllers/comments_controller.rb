@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
     	@comment = @micropost.comments.build(comment_params)
     	@comment.user = current_user
     	if @comment.save
-      		redirect_to(root_url, notice: "Comment created")  
+      		redirect_to(request.referrer || root_url, notice: "Comment created")  
     	end  
 	end
 
