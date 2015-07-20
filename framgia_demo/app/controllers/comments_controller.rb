@@ -4,14 +4,18 @@ class CommentsController < ApplicationController
 
 	def create
 		@micropost = Micropost.find_by(id: params[:comment][:micropost_id])
-    	@comment = @micropost.comments.build(comment_params)
-    	@comment.user = current_user
-    	if @comment.save
-      		redirect_to(request.referrer || root_url, notice: "Comment created")  
-    	end  
+  	@comment = @micropost.comments.build(comment_params)
+  	@comment.user = current_user
+  	if @comment.save
+    		redirect_to(request.referrer || root_url, notice: "Comment created")  
+  	end  
 	end
 
 	def destroy
+		# @micropost = Micropost.find_by(id: params[:comment][:micropost_id])
+		# @micropost.comment.find(params[:id]).destroy
+		Comment.find(params[:id]).destroy
+		redirect_to request.referrer || root_url, notice: "Comment deleted"
 	end
 
 	private
