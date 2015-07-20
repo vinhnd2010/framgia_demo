@@ -7,15 +7,22 @@ class CommentsController < ApplicationController
   	@comment = @micropost.comments.build(comment_params)
   	@comment.user = current_user
   	if @comment.save
-    		redirect_to(request.referrer || root_url, notice: "Comment created")  
-  	end  
+	  	respond_to do |format|
+	      format.html { redirect_to :back, notice: "Comment created" }
+	      format.js
+    	end
+    end
 	end
 
 	def destroy
 		# @micropost = Micropost.find_by(id: params[:comment][:micropost_id])
 		# @micropost.comment.find(params[:id]).destroy
 		Comment.find(params[:id]).destroy
-		redirect_to request.referrer || root_url, notice: "Comment deleted"
+		# render json: {status: :deleted}
+		respond_to do |format|
+			format.html {redirect_to(request.referrer || root_url, notice: "Comment deleted") }
+			format.js
+		end
 	end
 
 	private

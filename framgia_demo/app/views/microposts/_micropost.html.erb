@@ -9,16 +9,19 @@
     									data: {confirm: "You sure?"} %>
   </span>
   
-  <%= render micropost.comments %>
+  <ul id = "comments_<%=micropost.id%>">
+    <%= render micropost.comments %>
+  </ul>
+
   <% if logged_in? && (current_user.following?(micropost.user)||current_user?(micropost.user))%>
-    <%= form_for(@comment = micropost.comments.build ) do |f| %>
+    <%= form_for(@comment = micropost.comments.build, remote: true ) do |f| %>
         <div>
           <%= hidden_field :comment, :micropost_id %>
           <%= hidden_field_tag :user_id, current_user.id %>
         </div>
         <p>
           <br />
-          <%= f.text_field :content, placeholder: "Comment ..." %>
+          <%= f.text_field :content, placeholder: "Comment ...", class: 'comment_content' %>
           
         </p>
       

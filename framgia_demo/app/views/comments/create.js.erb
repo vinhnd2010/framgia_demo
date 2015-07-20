@@ -1,0 +1,2 @@
+$("#comments_<%=@micropost.id%>").prepend("<%= escape_javascript(render partial: 'comments/comment', locals: {comment: @comment}) %>");
+$("#micropost-<%=@micropost.id%>").find(".comment_content").val('');
